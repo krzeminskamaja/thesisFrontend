@@ -5,15 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import CustomEventForm from './Form';
-import { Switch } from '@mui/material';
 
 export default function IndexApp() {
   return (
     <BrowserRouter>
-    <Routes>
-      <Route path="/" Component={App} />
-      <Route path="/form" Component={CustomEventForm} />
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route path="form" />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
