@@ -12,6 +12,10 @@ function App() {
     navigate("/form");
   }
 
+  function handleClickPythonListeners() {
+    navigate("/startLSLListeners");
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -20,6 +24,7 @@ function App() {
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
         <Button onClick={handleClick}>Add custom event</Button>
+        <Button onClick={handleClickPythonListeners}>Start LSL listeners (with Kafka producers)</Button>
         <a
           className="App-link"
           href="https://reactjs.org"
