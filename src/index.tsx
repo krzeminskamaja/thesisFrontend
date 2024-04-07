@@ -5,17 +5,27 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import CustomEventForm from './Form';
+import CustomEventForm from './components/CustomEventForm';
 import { Switch } from '@mui/material';
+import store from './redux/store'
+import { Provider } from 'react-redux'
+import StartListenersForm from './components/StartListenersForm';
+import StartNewSessionForm from './components/StartNewSessionForm';
+import CurrentSessionView from './components/CurrentSessionView';
 
 export default function IndexApp() {
   return (
+    <Provider store={store}>
     <BrowserRouter>
     <Routes>
       <Route path="/" Component={App} />
       <Route path="/form" Component={CustomEventForm} />
+      <Route path="/startListeners" Component={StartListenersForm} />
+      <Route path="/startNewSession" Component={StartNewSessionForm} />
+      <Route path="/currentSessionView" Component={CurrentSessionView}/>
       </Routes>
     </BrowserRouter>
+    </Provider>
   );
 }
 
