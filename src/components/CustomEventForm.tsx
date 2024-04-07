@@ -18,18 +18,24 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 function CustomEventForm() {
     const [eventType, setEventType] = useState('');
     const [eventDescription, setEventDescription] = useState('');
-    const [parentPatient, setParentPatient] = useState('');
+    const [who, setWho] = useState('');
     const [value, onChange] = useState<Value>(new Date());
     const dispatch = useDispatch();
     async function handleSubmit(e: { preventDefault: () => void; }) {
-        dispatch(updateCustomEvent(eventType,eventDescription,parentPatient,Date.now().toLocaleString().toString()))
+        const payload = {
+          eventType: eventType,
+          eventDescription: eventDescription,
+          who: who,
+          when: Date.now().toLocaleString().toString()
+        }
+        dispatch(updateCustomEvent(payload))
         e.preventDefault();
         console.log(eventType)
         console.log(eventDescription)
-        console.log(parentPatient)
+        console.log(who)
         postCustomEvent({ eventType: eventType,
           eventDescription: eventDescription,
-          who: parentPatient,
+          who: who,
           when: Date.now().toLocaleString().toString() },dispatch)
       }
 
@@ -39,7 +45,7 @@ function CustomEventForm() {
         <FormControl>
             <TextField id="outlined-basic" label="Type of event" value={eventType} onChange={(event) => setEventType(event.target.value)}/>
             <TextField id="filled-basic" label="Event description" value={eventDescription} onChange={(event) => setEventDescription(event.target.value)}/>
-            <TextField id="standard-basic" label="Parent or patient" value={parentPatient} onChange={(event) => setParentPatient(event.target.value)}/>
+            <TextField id="standard-basic" label="Parent or patient" value={who} onChange={(event) => setWho(event.target.value)}/>
             <Button onClick={handleSubmit}>Submit</Button>
       </FormControl>
       </div>

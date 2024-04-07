@@ -10,17 +10,17 @@ import DateTimePicker from 'react-datetime-picker'
 import { useDispatch } from "react-redux";
 import { updateCustomEvent } from "../redux/actions/customEventActions";
 import { postCustomEvent } from "../redux/middleware/customEventAPI";
-import { postStartLSLListeners } from "../redux/middleware/startLSLListenersAPI";
+import { postStartListeners } from "../redux/middleware/startListenersAPI";
 
 type ValuePiece = Date | null;
 
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-function StartLSLListenersForm() {
+function StartListenersForm() {
     const [deviceType1, setDeviceType1] = useState('');
     const [deviceType2, setDeviceType2] = useState('');
     async function handleSubmit(e: { preventDefault: () => void; }) {
-        postStartLSLListeners({ deviceTypes: [deviceType1,deviceType2]
+        postStartListeners({ deviceTypes: [deviceType1,deviceType2]
       })
     }
 
@@ -35,4 +35,4 @@ function StartLSLListenersForm() {
     );
   }
 
-export default StartLSLListenersForm;
+export default StartListenersForm;

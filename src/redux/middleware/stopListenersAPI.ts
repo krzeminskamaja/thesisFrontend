@@ -6,10 +6,10 @@ import { updateCustomEventError, updateCustomEventLoading } from "../actions/cus
 import { pythonListenersHostAndPort } from "../../constants";
 import { ListenerDevicesType } from "../../types/ListenerDevicesType";
 
-export const postStartLSLListeners = (payload: ListenerDevicesType) => {
+export const postStopListeners = (payload: ListenerDevicesType) => {
   /*dispatch(updateCustomEventLoading(error)*/  
   axios.post(
-    pythonListenersHostAndPort + '/startLSLListeners',
+    pythonListenersHostAndPort + '/stopListeners',
         payload,
         { headers: { 'Content-Type': 'application/json' } }
       ).then((response)=> console.log(response)).catch((error)=> console.log(error) /*dispatch(updateCustomEventError(error)*/)

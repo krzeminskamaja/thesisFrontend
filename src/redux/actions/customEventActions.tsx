@@ -1,15 +1,11 @@
+import { CustomEventType } from "../../types/CustomEventType"
 import { UPDATE_CUSTOM_EVENT, UPDATE_CUSTOM_EVENT_ERROR, UPDATE_CUSTOM_EVENT_LOADING } from "../constants"
 
-export function updateCustomEvent(eventType: string, eventDescription: string, parentPatient: string, when: string) {
+export function updateCustomEvent(payload: CustomEventType) {
    
     return {
       type: UPDATE_CUSTOM_EVENT,
-      payload: {
-        eventType: eventType,
-        eventDescription: eventDescription,
-        parentPatient: parentPatient,
-        when: when
-      },
+      payload: payload,
    }
 }
 export {}

@@ -9,7 +9,9 @@ import CustomEventForm from './components/CustomEventForm';
 import { Switch } from '@mui/material';
 import store from './redux/store'
 import { Provider } from 'react-redux'
-import StartLSLListenersForm from './components/StartLSLListenersForm';
+import StartListenersForm from './components/StartListenersForm';
+import StartNewSessionForm from './components/StartNewSessionForm';
+import CurrentSessionView from './components/CurrentSessionView';
 
 export default function IndexApp() {
   return (
@@ -18,7 +20,9 @@ export default function IndexApp() {
     <Routes>
       <Route path="/" Component={App} />
       <Route path="/form" Component={CustomEventForm} />
-      <Route path="/startLSLListeners" Component={StartLSLListenersForm} />
+      <Route path="/startListeners" Component={StartListenersForm} />
+      <Route path="/startNewSession" Component={StartNewSessionForm} />
+      <Route path="/currentSessionView" Component={CurrentSessionView}/>
       </Routes>
     </BrowserRouter>
     </Provider>
