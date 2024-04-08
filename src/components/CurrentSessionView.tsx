@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateCustomEvent } from "../redux/actions/customEventActions";
 import { postCustomEvent } from "../redux/middleware/customEventAPI";
 import { selectListenerStatus, selectSessionIDAndStatus } from "../redux/store";
-import { postStopListeners } from "../redux/middleware/stopListenersAPI";
+import { postStopListener, postStopListeners } from "../redux/middleware/stopListenersAPI";
 import { getListenersStatus } from "../redux/middleware/getListenersStatusAPI";
 import { ListenerType } from "../types/ListenerType";
 
@@ -30,6 +30,10 @@ function CurrentSessionView() {
         getListenersStatus(dispatch)
     }
 
+    async function handleSubmitStopStartListener(listener: ListenerType) {
+        postStopListener(listener)
+    }
+
 
     return (
       <div>
@@ -45,6 +49,7 @@ function CurrentSessionView() {
                 <div key={index}>
                     <Typography>Listener name: {listener.name}</Typography>
                     <Typography>Listener status: {listener.status ? "active" : "inactive"}</Typography>
+                    <Button onClick={()=>handleSubmitStopStartListener(listener)}>{listener.status ? "Stop listener" : "Start listener" }</Button>
                 </div>
                 );
             }) : <Typography>No listeners active</Typography>}
