@@ -2,11 +2,6 @@ import { Button, FormControl, FormHelperText, Input, InputLabel, TextField } fro
 import axios from "axios";
 import { useEffect, useState } from "react";
 import dayjs, { Dayjs } from 'dayjs';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DateTimeField } from '@mui/x-date-pickers/DateTimeField';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import DateTimePicker from 'react-datetime-picker'
 import { useDispatch } from "react-redux";
 import { updateCustomEvent } from "../redux/actions/customEventActions";
 import { postCustomEvent } from "../redux/middleware/customEventAPI";
