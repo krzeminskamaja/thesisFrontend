@@ -26,17 +26,11 @@ function CustomEventForm() {
           eventType: eventType,
           eventDescription: eventDescription,
           who: who,
-          when: Date.now().toLocaleString().toString()
+          when: new Intl.DateTimeFormat('dk-DK', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(Date.now())
         }
         dispatch(updateCustomEvent(payload))
         e.preventDefault();
-        console.log(eventType)
-        console.log(eventDescription)
-        console.log(who)
-        postCustomEvent({ eventType: eventType,
-          eventDescription: eventDescription,
-          who: who,
-          when: Date.now().toLocaleString().toString() },dispatch)
+        postCustomEvent(payload,dispatch)
       }
 
 

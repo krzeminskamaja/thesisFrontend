@@ -14,6 +14,7 @@ import { selectListenerStatus, selectSessionIDAndStatus } from "../redux/store";
 import { postStopListener, postStopListeners } from "../redux/middleware/stopListenersAPI";
 import { getListenersStatus } from "../redux/middleware/getListenersStatusAPI";
 import { ListenerType } from "../types/ListenerType";
+import { postStartListener } from "../redux/middleware/startListenersAPI";
 
 function CurrentSessionView() {
     const sessionData = useSelector(selectSessionIDAndStatus)
@@ -31,7 +32,10 @@ function CurrentSessionView() {
     }
 
     async function handleSubmitStopStartListener(listener: ListenerType) {
-        postStopListener(listener)
+        if(listener.status)
+            postStopListener(listener)
+        else
+            postStartListener({ deviceTypes: [listener.name]})
     }
 
 

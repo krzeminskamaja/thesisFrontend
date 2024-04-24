@@ -6,7 +6,9 @@ import { updateCustomEventError, updateCustomEventLoading } from "../actions/cus
 import { bffHostAndPort } from "../../constants";
 
 export const postCustomEvent = (payload: CustomEventType, dispatch: Dispatch<UnknownAction>) => {
-  /*dispatch(updateCustomEventLoading(error)*/  
+  /*minimal logging xd*/  
+  console.log('posting custom event:')
+  console.log(payload)
   axios.post(
       bffHostAndPort + '/newCustomEvent',
         payload,

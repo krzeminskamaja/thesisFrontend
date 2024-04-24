@@ -1,4 +1,5 @@
 export type ListenerType = {
     name: string,
-    status: string
+    status: string,
+    isParent: string
   };

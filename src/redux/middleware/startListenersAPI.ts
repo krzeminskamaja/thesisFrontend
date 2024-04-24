@@ -14,3 +14,12 @@ export const postStartListeners = (payload: ListenerDevicesType) => {
         { headers: { 'Content-Type': 'application/json' } }
       ).then((response)=> console.log(response)).catch((error)=> console.log(error) /*dispatch(updateCustomEventError(error)*/)
  };
+
+ export const postStartListener = (payload: ListenerDevicesType) => {
+  /*dispatch(updateCustomEventLoading(error)*/  
+  axios.post(
+    pythonListenersHostAndPort + '/startListener',
+        payload,
+        { headers: { 'Content-Type': 'application/json' } }
+      ).then((response)=> console.log(response)).catch((error)=> console.log(error) /*dispatch(updateCustomEventError(error)*/)
+ };
