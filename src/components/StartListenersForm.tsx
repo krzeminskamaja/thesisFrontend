@@ -9,7 +9,7 @@ import { postStartListeners } from "../redux/middleware/startListenersAPI";
 import { startNewSession } from "../redux/actions/startNewSessionActions";
 import { useNavigate } from "react-router-dom";
 import { getMarkerTopicName, getTopicName } from "../redux/constants";
-import { areConsentsHandled } from "../redux/store";
+import { areConsentsHandled, selectSessionIDAndStatus } from "../redux/store";
 
 type ValuePiece = Date | null;
 
@@ -18,7 +18,8 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 
 function StartListenersForm() {
-    const [sessionID, setSessionID] = useState('');
+  const sessionIdFromState = useSelector(selectSessionIDAndStatus)
+    const [sessionID, setSessionID] = useState(sessionIdFromState.sessionID);
     const [deviceType1, setDeviceType1] = useState('');
     const [deviceType2, setDeviceType2] = useState('');
     const [deviceType3, setDeviceType3] = useState('');
