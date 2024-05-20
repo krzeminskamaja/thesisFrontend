@@ -1,10 +1,12 @@
-import { Button, FormControl, FormHelperText, Input, InputLabel, TextField } from "@mui/material";
+import { Button, FormControl, FormHelperText, Input, InputLabel, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import dayjs, { Dayjs } from 'dayjs';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateCustomEvent } from "../redux/actions/customEventActions";
 import { postCustomEvent } from "../redux/middleware/customEventAPI";
+import { selectSessionIDAndStatus } from "../redux/store";
+import { getMarkerTopicName } from "../redux/constants";
 
 type ValuePiece = Date | null;
 
@@ -12,6 +14,7 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 function CustomEventForm() {
     const [eventType, setEventType] = useState('');
+    const sessionId = useSelector(selectSessionIDAndStatus)
     const [eventDescription, setEventDescription] = useState('');
     const [who, setWho] = useState('');
     const [value, onChange] = useState<Value>(new Date());
@@ -21,7 +24,8 @@ function CustomEventForm() {
           eventType: eventType,
           eventDescription: eventDescription,
           who: who,
-          when: new Intl.DateTimeFormat('dk-DK', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(Date.now())
+          when: new Intl.DateTimeFormat('dk-DK', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(Date.now()),
+          topicName: getMarkerTopicName(sessionId.sessionID)
         }
         dispatch(updateCustomEvent(payload))
         e.preventDefault();
@@ -32,6 +36,7 @@ function CustomEventForm() {
     return (
       <div>
         <FormControl>
+            <Typography>Send an event marker</Typography>
             <TextField id="outlined-basic" label="Type of event" value={eventType} onChange={(event) => setEventType(event.target.value)}/>
             <TextField id="filled-basic" label="Event description" value={eventDescription} onChange={(event) => setEventDescription(event.target.value)}/>
             <TextField id="standard-basic" label="Parent or patient" value={who} onChange={(event) => setWho(event.target.value)}/>

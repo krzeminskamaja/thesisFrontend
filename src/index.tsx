@@ -7,14 +7,15 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CustomEventForm from './components/CustomEventForm';
 import { Switch } from '@mui/material';
-import store from './redux/store'
-import { Provider } from 'react-redux'
+import store, { isUserLoggedIn } from './redux/store'
+import { Provider, useSelector } from 'react-redux'
 import StartListenersForm from './components/StartListenersForm';
-import StartNewSessionForm from './components/StartNewSessionForm';
+import SaveConsentForm from './components/SaveConsentForm';
 import CurrentSessionView from './components/CurrentSessionView';
 import SignIn from './components/SignIn';
 
 export default function IndexApp() {
+
   return (
     <Provider store={store}>
     <BrowserRouter>
@@ -22,7 +23,7 @@ export default function IndexApp() {
       <Route path="/" Component={App} />
       <Route path="/form" Component={CustomEventForm} />
       <Route path="/startListeners" Component={StartListenersForm} />
-      <Route path="/startNewSession" Component={StartNewSessionForm} />
+      <Route path="/saveConsent" Component={SaveConsentForm} />
       <Route path="/currentSessionView" Component={CurrentSessionView}/>
       <Route path="/signIn" Component={SignIn}/>
       </Routes>

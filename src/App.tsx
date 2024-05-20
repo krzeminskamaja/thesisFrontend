@@ -16,7 +16,7 @@ function App() {
   }
 
   function handleClickPythonListeners() {
-    navigate("/startListeners");
+    navigate("/saveConsent");
   }
 
   function handleStartNewSession() {
@@ -29,7 +29,6 @@ function App() {
   return (
     <div className="App">{isAynoneLoggedIn.isLoggedIn ? <header className="App-header">
     <img src={logo} className="App-logo" alt="logo" />
-    <Button onClick={handleClick}>Add custom event</Button>
     <Button onClick={handleClickPythonListeners}>Start new session and LSL listeners</Button>
   </header> : <SignIn/>}
       

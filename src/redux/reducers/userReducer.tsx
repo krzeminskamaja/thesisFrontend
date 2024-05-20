@@ -1,15 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { USER_LOGGED_IN } from '../constants';
+import { USER_LOGGED_IN, CLEAN_USER, CONSENTS_HANDLED } from '../constants';
 
 const initialState: RootUserState = {
-   login: '',
+   name: '',
+   pass: '',
    isLoggedIn: false,
    isError: false,
    isLoading: false
  };
 
  interface RootUserState {
-   login: string,
+   name: string,
+   pass: string,
    isLoggedIn: boolean,
    isLoading: boolean,
    isError: boolean
@@ -19,8 +21,13 @@ const initialState: RootUserState = {
     switch (action.type) {
        case USER_LOGGED_IN:
           return {
-            ...state, ...action.payload
+            ...state, 
+            isLoggedIn: true
           }
+      case CLEAN_USER:
+         return {
+            ...state, ...initialState
+          } 
        default:
           return state;
     }

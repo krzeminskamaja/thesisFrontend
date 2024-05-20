@@ -32,3 +32,7 @@ export const isUserLoggedIn = (state: any) => {
     isLoggedIn: state.user.isLoggedIn
   }
 }
+
+export const areConsentsHandled = (state: any) => {
+  return state.currentSession.consentsHandled
+}

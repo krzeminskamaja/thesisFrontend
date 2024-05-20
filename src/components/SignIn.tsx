@@ -8,12 +8,15 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useDispatch } from "react-redux";
-import { updateUserLogin } from "../redux/actions/userActions";
+import { cleanUser, updateUserLogin } from "../redux/actions/userActions";
 import { useNavigate } from "react-router-dom";
+import { getUserByName } from "../redux/middleware/userAPI";
+import { useEffect } from "react";
 
 export default function SignIn() {
   const dispatch = useDispatch()
   const navigate = useNavigate();
+
 
   const handleSubmit = (event: { preventDefault: () => void; currentTarget: HTMLFormElement | undefined; }) => {
     event.preventDefault();
@@ -22,12 +25,7 @@ export default function SignIn() {
       email: data.get("email"),
       password: data.get("password"),
     });
-    dispatch(updateUserLogin({
-      login: data.get("email")?.toString() ?? "",
-      password: data.get("password")?.toString() ?? "" ,
-      isLoggedIn: true
-    }))
-    navigate("/");
+    getUserByName(data.get("email")?.toString() ?? "", data.get("password")?.toString() ?? "",dispatch, navigate)
   };
 
   return (

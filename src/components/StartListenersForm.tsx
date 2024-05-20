@@ -2,13 +2,14 @@ import { Button, FormControl, FormControlLabel, FormGroup, FormHelperText, Input
 import axios from "axios";
 import { useEffect, useState } from "react";
 import dayjs, { Dayjs } from 'dayjs';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateCustomEvent } from "../redux/actions/customEventActions";
 import { postCustomEvent } from "../redux/middleware/customEventAPI";
 import { postStartListeners } from "../redux/middleware/startListenersAPI";
 import { startNewSession } from "../redux/actions/startNewSessionActions";
 import { useNavigate } from "react-router-dom";
-import { getTopicName } from "../redux/constants";
+import { getMarkerTopicName, getTopicName } from "../redux/constants";
+import { areConsentsHandled } from "../redux/store";
 
 type ValuePiece = Date | null;
 
@@ -24,25 +25,24 @@ function StartListenersForm() {
     const [isParent1, setIsParent1] = useState('');
     const [isParent2, setIsParent2] = useState('');
     const [isParent3, setIsParent3] = useState('');
+    const [startMarkerStream, setStartMarkerStream] = useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
     async function handleSubmit(e: { preventDefault: () => void; }) {
       const topicNames = [getTopicName(deviceType1,isParent1,sessionID),getTopicName(deviceType2,isParent2,sessionID),getTopicName(deviceType3,isParent3,sessionID)]
-
-        postStartListeners({ 
+      if(startMarkerStream)
+        topicNames.push(getMarkerTopicName(sessionID))
+      postStartListeners({ 
           deviceTypes: topicNames.filter((topicName)=>topicName!="")
       })
-      dispatch(startNewSession({sessionID: sessionID, status: "STARTED"}))
       navigate('/currentSessionView')
     }
 
+    const consentsHandled = useSelector(areConsentsHandled)
+
     return (
-      <div>
-        <FormControl>
-        <Typography variant="body1">Provide a unique session ID</Typography>
-            <TextField id="outlined-basic" label="Your session ID" value={sessionID} onChange={(event) => setSessionID(event.target.value)}/>
-            <Typography>The session ID will be prepended with today's date, resulting in the following format: "YYYY-MM-DD_your-session-ID"</Typography>
-            
+      <div>{consentsHandled ? <FormControl>
+            <Typography variant="body1">Start LSL listeners - specify stream type and if it is parent or patient</Typography>
             <TextField id="outlined-basic" label="Type of device 1" value={deviceType1} onChange={(event) => setDeviceType1(event.target.value)}/>
             <FormGroup>
               <FormControlLabel control={<Switch value={isParent1} onChange={(event,checked) => setIsParent1(checked.toString())}/>} label="is parent" />
@@ -55,8 +55,12 @@ function StartListenersForm() {
             <FormGroup>
               <FormControlLabel control={<Switch value={isParent3} onChange={(event,checked) => setIsParent3(checked.toString())}/>} label="is parent" />
             </FormGroup>
+            <FormGroup>
+              <FormControlLabel control={<Switch value={startMarkerStream} onChange={(event,checked) => setStartMarkerStream(checked.toString())}/>} label="Start event marker stream?" />
+            </FormGroup>
             <Button onClick={handleSubmit}>Submit</Button>
-      </FormControl>
+      </FormControl> : <Typography variant="body1">No consents granted</Typography>}
+        
       </div>
     );
   }

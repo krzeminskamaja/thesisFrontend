@@ -8,6 +8,8 @@ export const GET_LISTENER_STATUS = 'GET_LISTENER_STATUS' ;
 export const GET_LISTENER_STATUS_LOADING = 'GET_LISTENER_STATUS_LOADING' ;
 export const GET_LISTENER_STATUS_ERROR = 'GET_LISTENER_STATUS_ERROR' ;
 export const USER_LOGGED_IN = 'USER_LOGGED_IN';
+export const CLEAN_USER = 'CLEAN_USER';
+export const CONSENTS_HANDLED = 'CONSENTS_HANDLED'
 
 export const getTopicName = (deviceType: string, isParent: string, sessionID: string) => {
     if(!deviceType) return ""
@@ -16,4 +18,11 @@ export const getTopicName = (deviceType: string, isParent: string, sessionID: st
     const todayString = today.getFullYear().toString()+today.getMonth().toString()+today.getDate().toString()
     console.log(`${todayString}_${sessionID}_${isParent}_${deviceType}`)
     return `${todayString}_${sessionID}_${isParent}_${deviceType}`
+}
+
+export const getMarkerTopicName = (sessionID: string) => {
+    const today = new Date();
+    const todayString = today.getFullYear().toString()+today.getMonth().toString()+today.getDate().toString()
+    console.log(`${todayString}_${sessionID}_markers`)
+    return `${todayString}_${sessionID}__markers`
 }
