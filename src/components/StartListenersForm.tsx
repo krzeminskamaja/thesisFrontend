@@ -20,16 +20,17 @@ function StartListenersForm() {
     const [sessionID, setSessionID] = useState('');
     const [deviceType1, setDeviceType1] = useState('');
     const [deviceType2, setDeviceType2] = useState('');
+    const [deviceType3, setDeviceType3] = useState('');
     const [isParent1, setIsParent1] = useState('');
     const [isParent2, setIsParent2] = useState('');
+    const [isParent3, setIsParent3] = useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
     async function handleSubmit(e: { preventDefault: () => void; }) {
-      console.log(deviceType1)
-      console.log(isParent1)
-      console.log(getTopicName(deviceType1,isParent1,sessionID))
+      const topicNames = [getTopicName(deviceType1,isParent1,sessionID),getTopicName(deviceType2,isParent2,sessionID),getTopicName(deviceType3,isParent3,sessionID)]
+
         postStartListeners({ 
-          deviceTypes: [getTopicName(deviceType1,isParent1,sessionID),getTopicName(deviceType2,isParent2,sessionID)]
+          deviceTypes: topicNames.filter((topicName)=>topicName!="")
       })
       dispatch(startNewSession({sessionID: sessionID, status: "STARTED"}))
       navigate('/currentSessionView')
@@ -38,6 +39,7 @@ function StartListenersForm() {
     return (
       <div>
         <FormControl>
+        <Typography variant="body1">Provide a unique session ID</Typography>
             <TextField id="outlined-basic" label="Your session ID" value={sessionID} onChange={(event) => setSessionID(event.target.value)}/>
             <Typography>The session ID will be prepended with today's date, resulting in the following format: "YYYY-MM-DD_your-session-ID"</Typography>
             
@@ -48,6 +50,10 @@ function StartListenersForm() {
             <TextField id="filled-basic" label="Type of device 2" value={deviceType2} onChange={(event) => setDeviceType2(event.target.value)}/>
             <FormGroup>
               <FormControlLabel control={<Switch value={isParent2} onChange={(event,checked) => setIsParent2(checked.toString())}/>} label="is parent" />
+            </FormGroup>
+            <TextField id="filled-basic" label="Type of device 3" value={deviceType3} onChange={(event) => setDeviceType3(event.target.value)}/>
+            <FormGroup>
+              <FormControlLabel control={<Switch value={isParent3} onChange={(event,checked) => setIsParent3(checked.toString())}/>} label="is parent" />
             </FormGroup>
             <Button onClick={handleSubmit}>Submit</Button>
       </FormControl>

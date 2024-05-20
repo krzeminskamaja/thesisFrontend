@@ -12,6 +12,7 @@ import { Provider } from 'react-redux'
 import StartListenersForm from './components/StartListenersForm';
 import StartNewSessionForm from './components/StartNewSessionForm';
 import CurrentSessionView from './components/CurrentSessionView';
+import SignIn from './components/SignIn';
 
 export default function IndexApp() {
   return (
@@ -23,6 +24,7 @@ export default function IndexApp() {
       <Route path="/startListeners" Component={StartListenersForm} />
       <Route path="/startNewSession" Component={StartNewSessionForm} />
       <Route path="/currentSessionView" Component={CurrentSessionView}/>
+      <Route path="/signIn" Component={SignIn}/>
       </Routes>
     </BrowserRouter>
     </Provider>
