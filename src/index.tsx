@@ -13,6 +13,8 @@ import StartListenersForm from './components/StartListenersForm';
 import SaveConsentForm from './components/SaveConsentForm';
 import CurrentSessionView from './components/CurrentSessionView';
 import SignIn from './components/SignIn';
+import FeedbackForm from './components/FeedbackForm';
+import CreateAccount from './components/CreateAccount';
 
 export default function IndexApp() {
 
@@ -26,6 +28,8 @@ export default function IndexApp() {
       <Route path="/saveConsent" Component={SaveConsentForm} />
       <Route path="/currentSessionView" Component={CurrentSessionView}/>
       <Route path="/signIn" Component={SignIn}/>
+      <Route path="/createAccount" Component={CreateAccount}/>
+      <Route path="/feedback" Component={FeedbackForm}/>
       </Routes>
     </BrowserRouter>
     </Provider>

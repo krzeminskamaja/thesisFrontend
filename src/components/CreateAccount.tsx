@@ -10,10 +10,10 @@ import Container from "@mui/material/Container";
 import { useDispatch } from "react-redux";
 import { cleanUser, updateUserLogin } from "../redux/actions/userActions";
 import { useNavigate } from "react-router-dom";
-import { getUserByName } from "../redux/middleware/userAPI";
+import { createAccount, getUserByName } from "../redux/middleware/userAPI";
 import { useEffect } from "react";
 
-export default function SignIn() {
+export default function CreateAccount() {
   const dispatch = useDispatch()
   const navigate = useNavigate();
 
@@ -25,7 +25,8 @@ export default function SignIn() {
       email: data.get("email"),
       password: data.get("password"),
     });
-    getUserByName(data.get("email")?.toString() ?? "", data.get("password")?.toString() ?? "",dispatch, navigate)
+    createAccount(data.get("email")?.toString() ?? "", data.get("password")?.toString() ?? "",dispatch, navigate)
+    navigate('/signIn')
   };
 
   return (
@@ -39,7 +40,7 @@ export default function SignIn() {
         }}
       >
         <Typography component="h1" variant="h5">
-          Sign in
+          Create new account
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
@@ -62,30 +63,14 @@ export default function SignIn() {
             id="password"
             autoComplete="current-password"
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
           <Button
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
+            Create account
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="/createAccount" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
         </Box>
       </Box>
     </Container>

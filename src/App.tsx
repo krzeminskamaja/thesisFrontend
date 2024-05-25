@@ -19,6 +19,10 @@ function App() {
     navigate("/saveConsent");
   }
 
+  function handleClickProvideFeedback() {
+    navigate("/feedback");
+  }
+
   function handleStartNewSession() {
     navigate("/startNewSession");
   }
@@ -30,6 +34,7 @@ function App() {
     <div className="App">{isAynoneLoggedIn.isLoggedIn ? <header className="App-header">
     <img src={logo} className="App-logo" alt="logo" />
     <Button onClick={handleClickPythonListeners}>Start new session and LSL listeners</Button>
+    <Button onClick={handleClickProvideFeedback}>Provide feedback</Button>
   </header> : <SignIn/>}
       
     </div>

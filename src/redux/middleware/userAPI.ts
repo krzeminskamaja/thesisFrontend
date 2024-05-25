@@ -18,5 +18,17 @@ export const getUserByName = (name: string, pass: string, dispatch: Dispatch<Unk
     ).then((response)=>{ dispatch(updateUserLogin(response.data)); navigate("/")}).catch((error)=> console.log(error) /*dispatch(updateCustomEventError(error)*/)
  };
 
+ export const createAccount = (name: string, pass: string, dispatch: Dispatch<UnknownAction>, navigate: NavigateFunction) => {
+  /*minimal logging xd*/  
+  console.log('gettin user by name')
+  console.log(name)
+  axios.post(
+    bffHostAndPort + '/api/users/new',
+      {name: name, pass: pass},
+      { headers: { 'Content-Type': 'application/json' } }
+    ).then((response)=>{ console.log(response)}).catch((error)=> console.log(error) /*dispatch(updateCustomEventError(error)*/)
+ };
+
+
 
  
