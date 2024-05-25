@@ -8,6 +8,6 @@ To start the applciation from production build:
 
 To start the application in dev mode:
 1) run "npm install" which will install all the dependencies from package-lock.json
-2) run "npm run"
+2) run "npm run" to start the application at localhost:3000
 
 Should you need to change IPs for other modules of the thesis prototype, they are specified in src/constants.ts file
